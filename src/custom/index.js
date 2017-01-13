@@ -5,21 +5,21 @@
  * media queries.
  */
 module.exports.brandNames = {
-  desktop: 'Wobble API Documentation',
-  tablet: 'Wobble API Docs',
-  mobile: 'API Docs'
+  desktop: 'Vinli API Documentation',
+  tablet: 'Vinli API Docs',
+  mobile: 'Vinli Docs'
 };
 
 /**
  * Classes that define the top-left brand box.
  */
-module.exports.brandClasses = 'fill-red';
+module.exports.brandClasses = 'vinli-dev-green';
 
 
 /**
  * Text for the link back to the linking website.
  */
-module.exports.backLink = 'Back to wobbles.com';
+module.exports.backLink = 'Back to dev.vin.li';
 
 /**
  * Runs after highlighting code samples. You can use this
