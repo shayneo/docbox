@@ -9,7 +9,7 @@ This returns a paginated list of devices that are registered with your applicati
 ```endpoint
 GET https://platform.vin.li/api/v1/devices
 ```
-#### Example Request
+#### Request
 ```curl
 curl -X GET "https://platform.vin.li/api/v1/devices"
 ```
@@ -42,7 +42,7 @@ getDevicesWithLimit:(nullable NSNumber *) offset:(nullable NSNumber *) onSuccess
     }
 ```
 
-#### Example Response
+#### Response
 ```bash
 ┌──────────────────────────────────────┬─────────────────┬─────────────────────────────────────────┐
 │ ID                                   │ Name            │ Created                                 │
@@ -108,7 +108,7 @@ getDevicesWithLimit:(nullable NSNumber *) offset:(nullable NSNumber *) onSuccess
 ```endpoint
 GET https://platform.vin.li/api/v1/devices/821374c0-d6d8-11e3-9c1a-0800200c9a66
 ```
-#### Example Request
+#### Request
 ```swift
 getDeviceWithId(deviceId: String, onSuccess: { (device: VLDevice?, response: HTTPURLResponse?) in
             //success block
@@ -126,7 +126,7 @@ getDeviceWithId:(nonnull NSString *) onSuccess:^(VLDevice *device, NSHTTPURLResp
 ```curl
 curl -X GET "https://platform.vin.li/api/v1/devices/821374c0-d6d8-11e3-9c1a-0800200c9a66"
 ```
-#### Example Response
+#### Response
 ```json
 {
   "device": {

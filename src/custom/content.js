@@ -30,6 +30,8 @@ module.exports =
   fs.readFileSync('./content/distance.md', 'utf8') + '\n' + 
   '# Trip Service\n' +
   fs.readFileSync('./content/trip.md', 'utf8') + '\n' +
+  '# Behavioral Service\n' +
+  fs.readFileSync('./content/behavioral.md', 'utf8') + '\n' +
   '# Safety Service\n' +
   fs.readFileSync('./content/safety.md', 'utf8') + '\n' +
   '# Virtual Vinli\n' +
