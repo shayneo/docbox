@@ -156,7 +156,7 @@ getOverallReportCardForDeviceWithId:(nonnull NSString *) timeSeries:(nullable VL
 ```
 
 ### Get a Report Card for a Time Segment
-Returns a Report Card based on all historical data available for a given Device or Vehicle, within a time segment that you’ve defined using `since` and `until` query parameters.
+Returns a Report Card based on all historical data available for a given Device or Vehicle, within a time segment that you’ve defined using since and until query parameters.
 
 This is helpful if you want to present the user something like, “Last week your driving score was a C”.
 
