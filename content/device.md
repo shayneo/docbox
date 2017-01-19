@@ -28,10 +28,17 @@ getDevicesOnSuccess({ (devicePager: VLDevicePager?, response: HTTPURLResponse?) 
 ```objc
 //gets devices for logged in user
 
-- (void)getDevicesOnSuccess:^(VLDevicePager *devicePager, NSHTTPURLResponse *response) {
-        //success block
+getDevicesOnSuccess:^(VLDevicePager *devicePager, NSHTTPURLResponse *response) {
+        //onSuccessBlock
     } onFailure:^(NSError *error, NSHTTPURLResponse *response, NSString *bodyString) {
-        //failure block
+        //onFailureBlock
+    }
+
+// OR get devices with a limit
+getDevicesWithLimit:(nullable NSNumber *) offset:(nullable NSNumber *) onSuccess:^(VLDevicePager *devicePager, NSHTTPURLResponse *response) {
+        //onSucccessBlock
+    } onFailure:^(NSError *error, NSHTTPURLResponse *response, NSString *bodyString) {
+        //onFailureBlock
     }
 ```
 
@@ -107,6 +114,13 @@ getDeviceWithId(deviceId: String, onSuccess: { (device: VLDevice?, response: HTT
             //success block
     }) { (error: Error?, response: HTTPURLResponse?, bodyString: String?) in
             //faulure block
+    }
+```
+```objc
+getDeviceWithId:(nonnull NSString *) onSuccess:^(VLDevice *device, NSHTTPURLResponse *response) {
+        //onSuccessBlock
+    } onFailure:^(NSError *error, NSHTTPURLResponse *response, NSString *bodyString) {
+        //onFailureBlock
     }
 ```
 ```curl
