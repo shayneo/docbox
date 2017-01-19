@@ -239,7 +239,7 @@ getReportCardForTripWithId:(nonnull NSString *) onSuccess:^(VLReportCard *report
 Returns a Report Card based on a specified report card id.
 
 ```endpoint
-https://behavioral.vin.li/api/v1/report_cards/549d628c-48dc-412d-8087-44a9f82f187e
+GET https://behavioral.vin.li/api/v1/report_cards/549d628c-48dc-412d-8087-44a9f82f187e
 ```
 
 #### Request
