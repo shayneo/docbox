@@ -317,7 +317,11 @@ GET https://distance.vin.li/api/v1/vehicles/ab4e7199-a3a6-412f-9088-bc05b6d89e31
 curl -X GET "https://distance.vin.li/api/v1/vehicles/ab4e7199-a3a6-412f-9088-bc05b6d89e31/odometer_triggers"
 ```
 ```objc
-
+getOdometerTriggersForVehicleWithId:(NSString *) onSucess:^(VLOdometerTriggerPager *odometerTriggerPager, NSHTTPURLResponse *response) {
+        //onSuccessBlock
+    } onFailure:^(NSError *error, NSHTTPURLResponse *response, NSString *bodyString) {
+        //onFailureBlock
+    }
 ```
 
 #### Response
