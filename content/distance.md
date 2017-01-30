@@ -274,4 +274,23 @@ createOdometerTrigger:(VLOdometerTrigger *) vehicleId:(NSString *) OnSuccess:^(V
 
 ### Delete an Odometer Triggers
 
+```endpoint
+DELETE https://distance.vin.li/api/v1/odometer_triggers/2b45bf31-b920-4afd-be1f-32b3f867bc4a
+```
+#### Request
+```curl
+curl -X DELETE "https://distance.vin.li/api/v1/odometer_triggers/2b45bf31-b920-4afd-be1f-32b3f867bc4a"
+```
+```objc
+deleteOdometerTriggerWithId:(nonnull NSString *) onSuccess:^(NSHTTPURLResponse *response) {
+        //onSuccessBlock
+    } onFailure:^(NSError *error, NSHTTPURLResponse *response, NSString *bodyString) {
+        //onFailureBlock
+```
+
+#### Response
+```json
+204
+```
+
 ### Get Odometer Triggers for a Vehicle
