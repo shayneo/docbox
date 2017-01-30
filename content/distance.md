@@ -30,6 +30,9 @@ getDistancesForVehicleWithId:(nonnull NSString *) onSuccess:^(VLDistancePager *d
 
 #### Response
 ```json
+HTTP/1.1 200 OK
+```
+```json
 {
     "distance": {
         "vehicleId": "36cf2965-7ed1-4314-8384-f9b6b75a7d3f",
@@ -86,6 +89,9 @@ createOdometer:(VLOdometer *) vehicleId:(NSString *) OnSuccess:^(VLOdometer *odo
 
 #### Response
 ```json
+HTTP/1.1 201 CREATED
+```
+```json
 {
     "odometer": {
         "id": "c6e3fbb7-c1e8-4de3-8c38-75661dd9cd40",
@@ -118,6 +124,9 @@ getOdometersForVehicleWithId:(NSString *) onSuccess:^(VLOdometerPager *odometerP
 ```
 
 #### Response
+```json
+HTTP/1.1 200 OK
+```
 ```json
 {
     "odometers": [
@@ -173,6 +182,9 @@ getOdometerWithId:(nonnull NSString *) onSuccess:^(VLOdometer *odometer, NSHTTPU
 
 #### Response
 ```json
+HTTP/1.1 200 OK
+```
+```json
 {
     "odometer": {
         "id": "bcdc8734-ce79-4d78-a911-f77c09316f5f",
@@ -205,7 +217,7 @@ deleteOdometerWithId:(nonnull NSString *) onSuccess:^(NSHTTPURLResponse *respons
 
 #### Response
 ```json
-
+HTTP/1.1 204 NO CONTENT
 ```
 
 ## Odometer Triggers
@@ -257,6 +269,9 @@ createOdometerTrigger:(VLOdometerTrigger *) vehicleId:(NSString *) OnSuccess:^(V
 
 #### Response
 ```json
+HTTP/1.1 201 CREATED
+```
+```json
 {
     "odometerTrigger": {
         "id": "2b45bf31-b920-4afd-be1f-32b3f867bc4a",
@@ -290,7 +305,62 @@ deleteOdometerTriggerWithId:(nonnull NSString *) onSuccess:^(NSHTTPURLResponse *
 
 #### Response
 ```json
-204
+HTTP/1.1 204 No Content
 ```
 
 ### Get Odometer Triggers for a Vehicle
+```endpoint
+GET https://distance.vin.li/api/v1/vehicles/ab4e7199-a3a6-412f-9088-bc05b6d89e31/odometer_triggers
+```
+#### Request
+```curl
+curl -X GET "https://distance.vin.li/api/v1/vehicles/ab4e7199-a3a6-412f-9088-bc05b6d89e31/odometer_triggers"
+```
+```objc
+
+```
+
+#### Response
+```json
+HTTP/1.1 200 OK
+```
+```json
+{
+       "odometerTriggers": [
+         {
+           "id": "2b45bf31-b920-4afd-be1f-32b3f867bc4a",
+           "vehicleId": "ab4e7199-a3a6-412f-9088-bc05b6d89e31",
+           "type": "specific",
+           "threshold": 5000000000,
+           "unit": "m",
+           "events": 0,
+           "links": {
+             "self": "https://distance.vin.li/api/v1/odometer_triggers/2b45bf31-b920-4afd-be1f-32b3f867bc4a",
+             "vehicle": "https://platform.vin.li/api/v1/vehicles/ab4e7199-a3a6-412f-9088-bc05b6d89e31"
+           }
+         },
+         {
+           "id": "6c35bf31-c120-5afd-ae1c-22b3c867fc4f",
+           "vehicleId": "ab4e7199-a3a6-412f-9088-bc05b6d89e31",
+           "type": "specific",
+           "threshold": 5000000000,
+           "unit": "m",
+           "events": 0,
+           "links": {
+             "self": "https://distance.vin.li/api/v1/odometer_triggers/6c35bf31-c120-5afd-ae1c-22b3c867fc4f",
+             "vehicle": "https://platform.vin.li/api/v1/vehicles/ab4e7199-a3a6-412f-9088-bc05b6d89e31"
+           }
+         }
+       ],
+       "meta": {
+         "pagination": {
+           "remaining": 0,
+           "until": "2016-12-20T22:48:48.058Z",
+           "since": "1970-01-01T00:00:00.000Z",
+           "limit": 20,
+           "sortDir": "desc",
+           "links": {}
+        }
+    }
+}
+```
