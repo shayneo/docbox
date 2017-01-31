@@ -28,11 +28,19 @@ There are many types of events that the platform will track on a device-by-devic
 ## Event API
 
 ### Get Events for a Device
+```endpoint
+GET https://events.vin.li/api/v1/devices/68d489c0-d7a2-11e3-9c1a-0800200c9a66/events
+```
 
 ### Get Events for a Vehicle
+```endpoint
+GET https://events.vin.li/api/v1/vehicles/48ef1264-7fd2-4319-8789-g9a6b85b7a8f/events
+```
 
 ### Get an Event
-
+```endpoint
+GET https://events.vin.li/api/v1/events/538f1195-a733-4ee7-a4e8-1fbbe7131f6a
+```
 ## Subscriptions
 
 ### Create a Subscription for a Device
