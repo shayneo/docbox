@@ -469,22 +469,403 @@ curl -X DELETE "https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-ae
 HTTP/1.1 204 NO CONTENT
 ```
 ## Notications
+Each time a subscription is triggered by an event, a new Notification is created that represents the event, subscription, and subsequent actions taken by the Vinli platform to notify your application.
+
+Notification state is useful in debugging notification handlers on your App. This state, responseCode, and response properties will inform you as to the result of Event Services’ attempt to call the notification URL. A notification will be linked to one subscription and may contain additional metadata depending on the trigger of the subscription. In the case of subscriptions to Rules, this metadata
+
+Fields included in a notification response include:
+
+* `id` - ID of the notification
+* `eventId` - ID of the event that triggered the notification
+* `eventType` - Type of the associated event
+* `eventTimestamp` - Time that the associated event occurred
+* `subscriptionId` - ID of the subscription that this notification is associated with
+* `url` - URL that was called by Event Service; this is copied from the subscription at the creation of the notification
+* `payload` - String of the payload exactly as it was posted to the above URL
+* `state` - Current state of the notification. State values may include created, queued, complete, or error
+
+The state of a notification start as created and moves to queued as soon as it is placed in the notification queue to be processed. Once the notification has been posted to the callback URL, the state will be moved to complete if the HTTP transaction was completed and a response code in the 200s was received. If the HTTP call is not able to be completed or a response code other than the 200s, the state will become error.
+
+If the notification is in the complete or error state, the fields below will be available in the response:
+
+* `responseCode` - HTTP code received from the URL above
+* `response` - String of the response from the URL above
+* `notifiedAt` - Time that the HTTP call was initiated
+* `respondedAt` - Time that the HTTP call was completed (if successful)
 
 ### Get a Notification
+```endpoint
+GET https://events.vin.li/api/v1/notifications/09704b59-83d9-44a5-a0f8-33d973bdac5e
+```
+
+#### Request
+```curl
+curl -X GET "https://events.vin.li/api/v1/notifications/09704b59-83d9-44a5-a0f8-33d973bdac5e"
+```
+
+#### Response
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+```
+```json
+{
+    "notification": {
+        "id": "09704b59-83d9-44a5-a0f8-33d973bdac5e",
+        "eventId": "314d7fcd-d4d6-4b78-9804-b171db60790a",
+        "eventType": "rule-leave",
+        "eventTimestamp": "2015-06-16T13:12:34.000Z",
+        "subscriptionId": "a896ff7d-ca46-4bf4-af71-b9b1573c3ef1",
+        "state": "complete",
+        "responseCode": 201,
+        "response": "{\"status\":\"success\"}",
+        "url": "https://myapp.com/notifications",
+        "payload": "{\"notification\":{\"event\":{\"id\":\"314d7fcd-d4d6-4b78-9804-b171db60790a\",\"timestamp\":\"2015-06-16T13:12:34.000Z\",\"deviceId\":\"4bffefbb-9fba-43ee-aebe-ed7f7f2fae84\",\"stored\":\"2015-06-16T13:12:35.825Z\",\"storageLatency\":1825,\"eventType\":\"rule-leave\",\"meta\":{\"direction\":\"leave\",\"firstEval\":false,\"rule\":{\"id\":\"79f2e013-b6b9-44dd-9f34-4be5da971d7a\",\"name\":\"[geofence] Marlee\",\"deviceId\":\"4bffefbb-9fba-43ee-aebe-ed7f7f2fae84\",\"boundaries\":[],\"evaluated\":true,\"covered\":false,\"createdAt\":\"2015-06-16T12:54:09.601Z\",\"links\":{\"self\":\"https://rules.vin.li/api/v1/rules/79f2e013-b6b9-44dd-9f34-4be5da971d7a\",\"events\":\"https://events.vin.li/api/v1/devices/4bffefbb-9fba-43ee-aebe-ed7f7f2fae84/events?type=rule&objectId=79f2e013-b6b9-44dd-9f34-4be5da971d7a\",\"subscriptions\":\"https://events.vin.li/api/v1/devices/4bffefbb-9fba-43ee-aebe-ed7f7f2fae84/subscriptions?objectType=rule&objectId=79f2e013-b6b9-44dd-9f34-4be5da971d7a\"}},\"message\":{\"id\":\"cd339f3d-b0d8-49a9-a87d-ca7ee3a937e2\",\"timestamp\":\"2015-06-16T13:12:34.000Z\",\"snapshot\":{\"location\":{\"lat\":32.5536468870112,\"lon\":-96.1153222519258}}}},\"object\":{\"id\":\"79f2e013-b6b9-44dd-9f34-4be5da971d7a\",\"type\":\"rule\",\"appId\":\"b75afd8f-7247-46e6-a0f9-04f187c9d9bd\"}},\"subscription\":{\"id\":\"a896ff7d-ca46-4bf4-af71-b9b1573c3ef1\",\"deviceId\":\"4bffefbb-9fba-43ee-aebe-ed7f7f2fae84\",\"eventType\":\"rule-leave\",\"url\":\"https://myapp.com/notifications\",\"object\":{\"id\":\"79f2e013-b6b9-44dd-9f34-4be5da971d7a\",\"type\":\"rule\"},\"appData\":\"{\\\"message\\\":\\\"This is your app-specific data\\\"}\"}}}",
+        "notifiedAt": "2015-06-16T13:12:35.862Z",
+        "respondedAt": "2015-06-16T13:12:36.300Z",
+        "createdAt": "2015-06-16T13:12:35.842Z",
+        "links": {
+            "self": "https://events.vin.li/api/v1/notifications/09704b59-83d9-44a5-a0f8-33d973bdac5e",
+            "event": "https://events.vin.li/api/v1/devices/4bffefbb-9fba-43ee-aebe-ed7f7f2fae84/events/314d7fcd-d4d6-4b78-9804-b171db60790a",
+            "subscription": "https://events.vin.li/api/v1/devices/4bffefbb-9fba-43ee-aebe-ed7f7f2fae84/subscriptions/a896ff7d-ca46-4bf4-af71-b9b1573c3ef1"
+        }
+    }
+}
+```
 
 ### Get Notifications for a Subscription
+```endpoint
+GET https://events.vin.li/api/v1/subscriptions/a896ff7d-ca46-4bf4-af71-b9b1573c3ef1/notifications
+```
 
+#### Request
+```curl
+curl -X GET "https://events.vin.li/api/v1/subscriptions/a896ff7d-ca46-4bf4-af71-b9b1573c3ef1/notifications"
+```
+
+#### Response
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+```
+```json
+{
+    "notifications": [
+        {
+            "id": "09704b59-83d9-44a5-a0f8-33d973bdac5e",
+            "eventId": "314d7fcd-d4d6-4b78-9804-b171db60790a",
+            "eventType": "rule-leave",
+            "eventTimestamp": "2015-06-16T13:12:34.000Z",
+            "subscriptionId": "a896ff7d-ca46-4bf4-af71-b9b1573c3ef1",
+            "state": "complete",
+            "responseCode": 201,
+            "response": "{\"status\":\"success\"}",
+            "url": "https://myapp.com/notifications",
+            "payload": "{...}",
+            "notifiedAt": "2015-06-16T13:12:35.862Z",
+            "respondedAt": "2015-06-16T13:12:36.300Z",
+            "createdAt": "2015-06-16T13:12:35.842Z",
+            "links": {
+                "self": "https://events.vin.li/api/v1/notifications/09704b59-83d9-44a5-a0f8-33d973bdac5e",
+                "event": "https://events.vin.li/api/v1/devices/4bffefbb-9fba-43ee-aebe-ed7f7f2fae84/events/314d7fcd-d4d6-4b78-9804-b171db60790a",
+                "subscription": "https://events.vin.li/api/v1/devices/4bffefbb-9fba-43ee-aebe-ed7f7f2fae84/subscriptions/a896ff7d-ca46-4bf4-af71-b9b1573c3ef1"
+            }
+        }
+    ],
+    "meta": {
+        "pagination": {
+            "remaining": 2,
+            "until": "2016-09-15T18:38:44.036Z",
+            "since": "1970-01-01T00:00:00.000Z",
+            "limit": 20,
+            "sortDir": "desc",
+            "links": {
+                "prior": "https://events.vin.li/api/v1/subscriptions/f4366076-afe0-4b05-83ff-55b6ddde0984/notifications?until=1473961364647"
+            }
+        }
+    }
+}
+```
 ### Get Notifications for an Event
+Returns the notifications that were triggered for any subscription associated with a given event.
+```endpoint
+GET https://events.vin.li/api/v1/events/314d7fcd-d4d6-4b78-9804-b171db60790a/notifications
+```
 
+#### Request
+```curl
+curl -X GET "https://events.vin.li/api/v1/events/314d7fcd-d4d6-4b78-9804-b171db60790a/notifications"
+```
+
+#### Response
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+```
+```json
+{
+    "notifications": [
+        {
+            "id": "09704b59-83d9-44a5-a0f8-33d973bdac5e",
+            "eventId": "314d7fcd-d4d6-4b78-9804-b171db60790a",
+            "eventType": "rule-leave",
+            "eventTimestamp": "2015-06-16T13:12:34.000Z",
+            "subscriptionId": "a896ff7d-ca46-4bf4-af71-b9b1573c3ef1",
+            "state": "complete",
+            "responseCode": 201,
+            "response": "{\"status\":\"success\"}",
+            "url": "https://myapp.com/notifications",
+            "payload": "{...}",
+            "notifiedAt": "2015-06-16T13:12:35.862Z",
+            "respondedAt": "2015-06-16T13:12:36.300Z",
+            "createdAt": "2015-06-16T13:12:35.842Z",
+            "links": {
+                "self": "https://events.vin.li/api/v1/notifications/09704b59-83d9-44a5-a0f8-33d973bdac5e",
+                "event": "https://events.vin.li/api/v1/devices/4bffefbb-9fba-43ee-aebe-ed7f7f2fae84/events/314d7fcd-d4d6-4b78-9804-b171db60790a",
+                "subscription": "https://events.vin.li/api/v1/devices/4bffefbb-9fba-43ee-aebe-ed7f7f2fae84/subscriptions/a896ff7d-ca46-4bf4-af71-b9b1573c3ef1"
+            }
+        }
+    ],
+    "meta": {
+        "pagination": {
+            "remaining": 0,
+            "until": "2016-09-15T20:19:32.978Z",
+            "since": "1970-01-01T00:00:00.000Z",
+            "limit": 20,
+            "sortDir": "desc",
+            "links": {}
+        }
+    }
+}
+```
 ## Notification Payloads
+When a subscription is triggered, an HTTP call using the “POST” method is made to the Subscription’s URL. This call uses content-type of “application/json” and sends a JSON representation containing a `notification` root object along with representations of the Event that triggered the notification and the associated Subscription. Below are several examples of Notifications for different types of Events.
+
+Note that the `appData` attribute of the subscription property contains the Application-specific data that you created the Subscription with, if applicable.
+
+In the example immediately below, the Subscription triggered is associated with a Rule. In this case, additional information is made available in the Notification including a representation of the Rule in the meta property. Additionally, a very useful property, `firstEval` is provided that lets your Application know whether or not this is the first evaluation of the Rule. The first evaluation of a Rule in which it can be established that the device is covered or not covered by the boundaries will always result in a notification. Using the firstEval property, your App can determine if the device was previously in a different state or was just in an unknown state.
 
 ### Rule-Leave
+```json
+{
+    "notification": {
+        "event": {
+            "id": "314d7fcd-d4d6-4b78-9804-b171db60790a",
+            "timestamp": "2015-06-16T13:12:34.000Z",
+            "deviceId": "4bffefbb-9fba-43ee-aebe-ed7f7f2fae84",
+            "eventType": "rule-leave",
+            "object": {
+                "id": "79f2e013-b6b9-44dd-9f34-4be5da971d7a",
+                "type": "rule",
+                "appId": "b75afd8f-7247-46e6-a0f9-04f187c9d9bd"
+            },
+            "meta": {
+                "direction": "leave",
+                "firstEval": false,
+                "rule": {
+                    "id": "79f2e013-b6b9-44dd-9f34-4be5da971d7a",
+                    "name": "My Geofence",
+                    "deviceId": "4bffefbb-9fba-43ee-aebe-ed7f7f2fae84",
+                    "boundaries": [],
+                    "evaluated": true,
+                    "covered": false,
+                    "createdAt": "2015-06-16T12:54:09.601Z",
+                    "links": {
+                        "self": "https://rules.vin.li/api/v1/rules/79f2e013-b6b9-44dd-9f34-4be5da971d7a",
+                        "events": "https://events.vin.li/api/v1/devices/4bffefbb-9fba-43ee-aebe-ed7f7f2fae84/events?type=rule&objectId=79f2e013-b6b9-44dd-9f34-4be5da971d7a",
+                        "subscriptions": "https://events.vin.li/api/v1/devices/4bffefbb-9fba-43ee-aebe-ed7f7f2fae84/subscriptions?objectType=rule&objectId=79f2e013-b6b9-44dd-9f34-4be5da971d7a"
+                    }
+                },
+                "message": {
+                    "id": "cd339f3d-b0d8-49a9-a87d-ca7ee3a937e2",
+                    "timestamp": "2015-06-16T13:12:34.000Z",
+                    "snapshot": {
+                        "location": {
+                            "lat": 32.5536468870112,
+                            "lon": -96.1153222519258
+                        }
+                    }
+                }
+            }
+        },
+        "subscription": {
+            "id": "a896ff7d-ca46-4bf4-af71-b9b1573c3ef1",
+            "deviceId": "4bffefbb-9fba-43ee-aebe-ed7f7f2fae84",
+            "eventType": "rule-leave",
+            "url": "https://myapp.com/notifications",
+            "object": {
+                "id": "79f2e013-b6b9-44dd-9f34-4be5da971d7a",
+                "type": "rule"
+            },
+            "appData": "{\"message\":\"This is your app-specific data\"}"
+        }
+    }
+}
+```
 
 ### Collision
+```json
+{
+    "notification": {
+        "event": {
+            "id": "edae9b7a-c447-442d-aead-ee0bf4f5e6b4",
+            "timestamp": "2016-08-22T23:12:59.607Z",
+            "deviceId": "4bffefbb-9fba-43ee-aebe-ed7f7f2fae84",
+            "stored": "2016-08-22T23:13:15.167Z",
+            "storageLatency": 15560,
+            "eventType": "collision",
+            "object": {
+                "id": "ba8d8890-3d4d-413a-ad8e-a3269d990e91",
+                "type": "vehicle"
+            },
+            "links": {
+                "self": "http://10.200.37.245:30003/api/v1/events/edae9b7a-c447-442d-aead-ee0bf4f5e6b4",
+                "notifications": "http://10.200.37.245:30003/api/v1/events/edae9b7a-c447-442d-aead-ee0bf4f5e6b4/notifications"
+            }
+        },
+        "subscription": {
+            "id": "f4366076-afe0-4b05-83ff-55b6ddde0984",
+            "deviceId": "4bffefbb-9fba-43ee-aebe-ed7f7f2fae84",
+            "eventType": "collision",
+            "url": "https://myapp.com/notifications",
+            "appData": null,
+            "createdAt": "2016-08-22T23:11:36.814Z",
+            "updatedAt": "2016-08-22T23:11:36.814Z",
+            "links": {
+                "self": "http://10.200.37.245:30003/api/v1/subscriptions/f4366076-afe0-4b05-83ff-55b6ddde0984",
+                "notifications": "http://10.200.37.245:30003/api/v1/subscriptions/f4366076-afe0-4b05-83ff-55b6ddde0984/notifications"
+            }
+        }
+    }
+}
+```
 
 ### DTC-On
-
+```json
+{
+    "notification": {
+        "event": {
+            "id": "aa2842c3-b647-48a1-80f1-cc6019ce387c",
+            "timestamp": "2016-08-22T23:12:20.003Z",
+            "deviceId": "4bffefbb-9fba-43ee-aebe-ed7f7f2fae84",
+            "stored": "2016-08-22T23:12:22.036Z",
+            "storageLatency": 2033,
+            "eventType": "dtc-on",
+            "meta": {
+                "code": "313cc7d7-1ac6-491c-9e02-a3d08e62984a"
+            },
+            "object": {
+                "id": "ba8d8890-3d4d-413a-ad8e-a3269d990e91",
+                "type": "vehicle"
+            },
+            "links": {
+                "self": "http://10.220.0.66:30003/api/v1/events/aa2842c3-b647-48a1-80f1-cc6019ce387c",
+                "notifications": "http://10.220.0.66:30003/api/v1/events/aa2842c3-b647-48a1-80f1-cc6019ce387c/notifications"
+            }
+        },
+        "subscription": {
+            "id": "e480343c-172a-41da-81ef-ce7950790ee0",
+            "deviceId": "4bffefbb-9fba-43ee-aebe-ed7f7f2fae84",
+            "eventType": "dtc-on",
+            "url": "https://myapp.com/notifications",
+            "appData": null,
+            "createdAt": "2016-08-22T23:09:22.023Z",
+            "updatedAt": "2016-08-22T23:09:22.023Z",
+            "links": {
+                "self": "http://10.220.0.66:30003/api/v1/subscriptions/e480343c-172a-41da-81ef-ce7950790ee0",
+                "notifications": "http://10.220.0.66:30003/api/v1/subscriptions/e480343c-172a-41da-81ef-ce7950790ee0/notifications"
+            }
+        }
+    }
+}
+```
 ### Distance-Trigger
-
+```json
+{
+    "notification": {
+        "event": {
+            "id": "4449b8a1-88ce-479e-83ba-46d233895519",
+            "timestamp": "2016-07-18T22:32:41.737Z",
+            "deviceId": "4bffefbb-9fba-43ee-aebe-ed7f7f2fae84",
+            "stored": "2016-07-18T22:32:41.860Z",
+            "storageLatency": 123,
+            "eventType": "distance-trigger",
+            "meta": {
+                "odometerTrigger": {
+                "id": "bc043c26-3d79-44ce-b08e-8193f4c5e493",
+                "vehicleId": "03d8ec74-523b-4ff7-8f6f-8228146b93b9",
+                "type": "specific",
+                "threshold": 24146537.36,
+                "events": 0,
+                "links": {
+                    "vehicle": "https://platform.vin.li/api/v1/vehicles/03d8ec74-523b-4ff7-8f6f-8228146b93b9"
+                    }
+                },
+                "estimatedOdometer": 24158103.340000004
+            },
+            "object": {
+                "id": "bc043c26-3d79-44ce-b08e-8193f4c5e493",
+                "type": "odometer-trigger"
+            },
+            "links": {
+                "self": "http://10.200.37.245:30003/api/v1/events/4449b8a1-88ce-479e-83ba-46d233895519",
+                "notifications": "http://10.200.37.245:30003/api/v1/events/4449b8a1-88ce-479e-83ba-46d233895519/notifications"
+            }
+        },
+        "subscription": {
+            "id": "2fc61637-8e2d-465f-8518-cce48f205faf",
+            "deviceId": "eb4f66ec-4050-4052-9559-baf5d8eb8511",
+            "eventType": "distance-trigger",
+            "url": "https://myapp.com/notifications",
+            "appData": null,
+            "createdAt": "2016-07-18T22:09:34.704Z",
+            "updatedAt": "2016-07-18T22:09:34.704Z",
+            "links": {
+                "self": "http://10.200.37.245:30003/api/v1/subscriptions/2fc61637-8e2d-465f-8518-cce48f205faf",
+                "notifications": "http://10.200.37.245:30003/api/v1/subscriptions/2fc61637-8e2d-465f-8518-cce48f205faf/notifications"
+            }
+        }
+    }
+}
+```
 ### Startup
+```json
+{
+    "notification": {
+        "event": {
+            "id": "5eca3320-7037-4eaf-8cea-08328bf25408",
+            "timestamp": "2016-08-24T20:26:04.816Z",
+            "deviceId": "4bffefbb-9fba-43ee-aebe-ed7f7f2fae84",
+            "stored": "2016-08-24T20:26:08.809Z",
+            "storageLatency": 3993,
+            "eventType": "startup",
+            "object": {
+                "id": "2271db32-aa6c-4ae5-9d68-f371eb3d1cfb",
+                "type": "vehicle"
+            },
+            "links": {
+                "self": "http://10.220.0.66:30003/api/v1/events/5eca3320-7037-4eaf-8cea-08328bf25408",
+                "notifications": "http://10.220.0.66:30003/api/v1/events/5eca3320-7037-4eaf-8cea-08328bf25408/notifications"
+            }
+        },
+        "subscription": {
+            "id": "050ea013-33f2-49ae-bcf2-f23032e6ca30",
+            "deviceId": "4bffefbb-9fba-43ee-aebe-ed7f7f2fae84",
+            "eventType": "startup",
+            "url": "https://myapp.io/startup",
+            "object": {
+                "id": "2271db32-aa6c-4ae5-9d68-f371eb3d1cfb",
+                "type": "vehicle"
+            },
+            "appData": null,
+            "createdAt": "2016-08-24T20:25:18.017Z",
+            "updatedAt": "2016-08-24T20:25:18.017Z",
+            "links": {
+                "self": "http://10.220.0.66:30003/api/v1/subscriptions/050ea013-33f2-49ae-bcf2-f23032e6ca30",
+                "notifications": "http://10.220.0.66:30003/api/v1/subscriptions/050ea013-33f2-49ae-bcf2-f23032e6ca30/notifications"
+            }
+        }
+    }
+}
+```
 
