@@ -289,14 +289,185 @@ Content-Type: application/json
     }
 }
 ```
+
 ### Get Subscriptions for a Vehicle
+```endpoint
+GET https://events.vin.li/api/v1/vehicles/48ef1264-7fd2-4319-8789-g9a6b85b7a8f/subscriptions
+```
+
+#### Request
+```curl
+curl -X GET "https://events.vin.li/api/v1/vehicles/48ef1264-7fd2-4319-8789-g9a6b85b7a8f/subscriptions"
+```
+
+#### Response
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+```
+```json
+{
+    "subscriptions": [
+        {
+            "id": "917fb546-5666-4fdd-aed6-53fa099b313b",
+            "vehicleId": "48ef1264-7fd2-4319-8789-g9a6b85b7a8f",
+            "eventType": "rule-*",
+            "object": {
+                "id": "58f815b9-693d-450a-8814-779c9bf8ad6f",
+                "type": "rule"
+            },
+            "url": "https://myapp.com/notifications",
+            "appData": "{\"message\":\"This is your app-specific data\"}"
+            "createdAt": "2015-06-16T12:54:09.876Z",
+            "updatedAt": "2015-06-16T12:54:09.876Z",
+            "links": {
+                "self": "https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa099b313b",
+                "notifications": "https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa099b313b/notifications"
+            }
+        },
+        {
+            "id": "829fb457-4757-4fdd-aed6-53fa108b402b",
+            "eventType": "startup",
+            "url": "https://myapp.com/notifications",
+            "vehicleId": "48ef1264-7fd2-4319-8789-g9a6b85b7a8f",
+            "object": null,
+            "appData": null,
+            "createdAt": "2016-01-25T19:35:35.148Z",
+            "updatedAt": "2016-01-25T19:35:35.148Z",
+            "links": {
+              "self": "https://events.vin.li/api/v1/subscriptions/829fb457-4757-4fdd-aed6-53fa108b402b",
+              "notifications": "https://events.vin.li/api/v1/subscriptions/829fb457-4757-4fdd-aed6-53fa108b402b/notifications"
+            }
+        },
+        ...
+    ],
+    "meta": {
+        "pagination": {
+            "total": 80,
+            "limit": 20,
+            "offset": 0,
+            "links": {
+                "first": "https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/subscriptions?offset=0&limit=20",
+                "last": "https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/subscriptions?offset=60&limit=20",
+                "next": "https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/subscriptions?offset=20&limit=20"
+            }
+        }
+    }
+}
+```
 
 ### Get a Subscription
+```endpoint
+GET https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa099b313b
+```
+
+#### Request
+```curl
+curl -X GET "https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa099b313b"
+```
+
+#### Response
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+```
+```json
+{
+    "subscription": {
+        "id": "917fb546-5666-4fdd-aed6-53fa099b313b",
+        "deviceId": "de01abb1-453d-4293-831a-f0d804b48fdf",
+        "eventType": "rule-*",
+        "object": {
+            "id": "58f815b9-693d-450a-8814-779c9bf8ad6f",
+            "type": "rule"
+        },
+        "url": "https://myapp.com/notifications",
+        "appData": "{\"message\":\"This is your app-specific data\"}"
+        "createdAt": "2015-06-16T12:54:09.876Z",
+        "updatedAt": "2015-06-16T12:54:09.876Z",
+        "links": {
+            "self": "https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa099b313b",
+            "notifications": "https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa099b313b/notifications"
+        }
+    }
+}
+```
 
 ### Update a Subscription
+Subscriptions are primarily immutable. The `url` and `appData` properties can be updated; however, the “functional” parts of the Subscription (`eventType`, `object`, etc.) are not modifiable.
+
+```endpoint
+POST https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/subscriptions
+```
+#### Body
+```json
+{
+    "subscription" : {
+        "eventType" : "rule-*",
+        "url": "https://myapp.com/v2/notifications",
+        "appData": "{\"message\":\"This is some updated app-specific data\"}",
+        "object": {
+            "id": "41d68c9e-2914-4923-8593-3abdf299537c",
+            "type": "rule"
+        }
+    }
+}
+```
+#### Request
+```curl
+curl -X POST "https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/subscriptions" -d '{
+    "subscription" : {
+        "eventType" : "rule-*",
+        "url": "https://myapp.com/v2/notifications",
+        "appData": "{\"message\":\"This is some updated app-specific data\"}",
+        "object": {
+            "id": "41d68c9e-2914-4923-8593-3abdf299537c",
+            "type": "rule"
+        }
+    }
+}'
+```
+
+#### Response
+```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+```
+```json
+{
+    "subscription" : {
+        "id": "917fb546-5666-4fdd-aed6-53fa099b313b",
+        "deviceId": "de01abb1-453d-4293-831a-f0d804b48fdf",
+        "eventType": "rule-*",
+        "object": {
+            "id": "58f815b9-693d-450a-8814-779c9bf8ad6f",
+            "type": "rule"
+        },
+        "url": "https://myapp.com/v2/notifications",
+        "appData": "{\"message\":\"This is some updated app-specific data\"}",
+        "createdAt": "2015-06-16T12:54:09.876Z",
+        "updatedAt": "2015-06-16T12:54:09.876Z",
+        "links": {
+            "self": "https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa099b313b",
+            "notifications": "https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa099b313b/notifications"
+        }
+    }
+}
+```
 
 ### Delete a Subscription
+```endpoint
+DELETE https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa099b313b
+```
+#### Request
+```curl
+curl -X DELETE "https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa099b313b"ß
+```
 
+#### Repsonse
+```json
+HTTP/1.1 204 NO CONTENT
+```
 ## Notications
 
 ### Get a Notification
