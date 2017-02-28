@@ -1,6 +1,6 @@
 
 
-## Overview
+## Event Service Overview
 The Vinli platform emits events for devices and vehicles at key moments in the vehicle/driver/developer lifecycle. By default, the platform will capture standard events for important things, like when the vehicle starts up, when a trip is compeleted, or when a device loses connection.
 
 Developers can also define their own "Rules", or criteria that trigger events. Rules can be defined using PID data ([see here](http://dev.vin.li/parameters.json)) or with geofencing.
