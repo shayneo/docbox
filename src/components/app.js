@@ -15,7 +15,7 @@ let languageOptions = [
   { title: 'cURL',
     short: 'cURL',
     value: 'curl' },
-  { title: 'CLI',
+  { title: 'Vinli CLI',
     short: 'cli',
     value: 'cli' },
   { title: 'JavaScript',
@@ -24,10 +24,10 @@ let languageOptions = [
   { title: 'Java',
     short: 'Java',
     value: 'java' },
-  { title: 'Objective-C SDK',
+  { title: 'Objective-C',
     short: 'ObjC',
     value: 'objc' },
-  { title: 'Swift SDK',
+  { title: 'Swift',
     short: 'Swift',
     value: 'swift' }
 ];
