@@ -18,7 +18,7 @@ GET https://distance.vin.li/api/v1/vehicles/36cf2965-7ed1-4314-8384-f9b6b75a7d3f
 ```
 #### Request
 ```curl
-curl -X GET "https://distance.vin.li/api/v1/vehicles/36cf2965-7ed1-4314-8384-f9b6b75a7d3f/distances/_latest"
+curl -u APP_ID:APP_SECRET -X GET "https://distance.vin.li/api/v1/vehicles/36cf2965-7ed1-4314-8384-f9b6b75a7d3f/distances/_latest"
 ```
 ```objc
 getDistancesForVehicleWithId:(nonnull NSString *) onSuccess:^(VLDistancePager *distancePager, NSHTTPURLResponse *response) {
@@ -113,7 +113,7 @@ GET https://distance.vin.li/api/v1/vehicles/ec74e512-ed9a-41ae-99e9-779882846b80
 ```
 #### Request
 ```curl
-curl -X GET "https://distance.vin.li/api/v1/vehicles/ec74e512-ed9a-41ae-99e9-779882846b80/odometers"
+curl -u APP_ID:APP_SECRET -X GET "https://distance.vin.li/api/v1/vehicles/ec74e512-ed9a-41ae-99e9-779882846b80/odometers"
 ```
 ```objc
 getOdometersForVehicleWithId:(NSString *) onSuccess:^(VLOdometerPager *odometerPager, NSHTTPURLResponse *response) {
@@ -170,7 +170,7 @@ GET https://distance.vin.li/api/v1/odometers/{odometerId}
 ```
 #### Request
 ```curl
-curl -X GET "https://distance.vin.li/api/v1/odometers/{odometerId}"
+curl -u APP_ID:APP_SECRET -X GET "https://distance.vin.li/api/v1/odometers/{odometerId}"
 ```
 ```objc
 getOdometerWithId:(nonnull NSString *) onSuccess:^(VLOdometer *odometer, NSHTTPURLResponse *response) {
@@ -205,7 +205,7 @@ DELETE https://distance.vin.li/api/v1/odometers/bcdc8734-ce79-4d78-a911-f77c0931
 ```
 #### Request
 ```curl
-curl -X DELETE "https://distance.vin.li/api/v1/odometers/bcdc8734-ce79-4d78-a911-f77c09316f5f"
+curl -u APP_ID:APP_SECRET -X DELETE "https://distance.vin.li/api/v1/odometers/bcdc8734-ce79-4d78-a911-f77c09316f5f"
 ```
 ```objc
 deleteOdometerWithId:(nonnull NSString *) onSuccess:^(NSHTTPURLResponse *response) {
@@ -240,7 +240,7 @@ POST https://distance.vin.li/api/v1/vehicles/ab4e7199-a3a6-412f-9088-bc05b6d89e3
 ```
 #### Request
 ```curl
-curl -X POST "https://distance.vin.li/api/v1/vehicles/ab4e7199-a3a6-412f-9088-bc05b6d89e31/odometer_triggers" -d '{
+curl -u APP_ID:APP_SECRET -X POST "https://distance.vin.li/api/v1/vehicles/ab4e7199-a3a6-412f-9088-bc05b6d89e31/odometer_triggers" -d '{
     "odometerTrigger": {
         "type": "specific",
         "threshold": 5000000,
@@ -294,7 +294,7 @@ DELETE https://distance.vin.li/api/v1/odometer_triggers/2b45bf31-b920-4afd-be1f-
 ```
 #### Request
 ```curl
-curl -X DELETE "https://distance.vin.li/api/v1/odometer_triggers/2b45bf31-b920-4afd-be1f-32b3f867bc4a"
+curl -u APP_ID:APP_SECRET -X DELETE "https://distance.vin.li/api/v1/odometer_triggers/2b45bf31-b920-4afd-be1f-32b3f867bc4a"
 ```
 ```objc
 deleteOdometerTriggerWithId:(nonnull NSString *) onSuccess:^(NSHTTPURLResponse *response) {
@@ -314,7 +314,7 @@ GET https://distance.vin.li/api/v1/vehicles/ab4e7199-a3a6-412f-9088-bc05b6d89e31
 ```
 #### Request
 ```curl
-curl -X GET "https://distance.vin.li/api/v1/vehicles/ab4e7199-a3a6-412f-9088-bc05b6d89e31/odometer_triggers"
+curl -u APP_ID:APP_SECRET -X GET "https://distance.vin.li/api/v1/vehicles/ab4e7199-a3a6-412f-9088-bc05b6d89e31/odometer_triggers"
 ```
 ```objc
 getOdometerTriggersForVehicleWithId:(NSString *) onSucess:^(VLOdometerTriggerPager *odometerTriggerPager, NSHTTPURLResponse *response) {
