@@ -22,7 +22,7 @@ GET https://behavioral.vin.li/api/v1/devices/fe4bbc20-cc90-11e3-8e05-f3abac5b6b5
 
 #### Request
 ```curl
-curl -X GET "https://behavioral.vin.li/api/v1/devices/fe4bbc20-cc90-11e3-8e05-f3abac5b6b58/report_cards"
+curl -u APP_ID:APP_SECRET -X GET "https://behavioral.vin.li/api/v1/devices/fe4bbc20-cc90-11e3-8e05-f3abac5b6b58/report_cards"
 ```
 ```objc
 getReportCardsForDeviceWithId:(nonnull NSString *) timeSeries:(nullable VLTimeSeries *) onSuccess:^(VLReportCardPager *reportCardPager, NSHTTPURLResponse *response) {
@@ -73,7 +73,7 @@ GET https://behavioral.vin.li/api/v1/vehicles/ca10cd7a-d2a5-4bb3-b47b-2aa0b8848f
 ```
 #### Request
 ```curl
-curl -X GET "https://behavioral.vin.li/api/v1/vehicles/ca10cd7a-d2a5-4bb3-b47b-2aa0b8848f55/report_cards"
+curl -u APP_ID:APP_SECRET -X GET "https://behavioral.vin.li/api/v1/vehicles/ca10cd7a-d2a5-4bb3-b47b-2aa0b8848f55/report_cards"
 ```
 ```objc
 getReportCardsForVehicleWithId:(nonnull NSString *) timeSeries:(nullable VLTimeSeries *) onSuccess:^(VLReportCardPager *reportCardPager, NSHTTPURLResponse *response) {
@@ -125,7 +125,7 @@ GET https://behavioral.vin.li/api/v1/devices/602c6490-d7a3-11e3-9c1a-0800200c9a6
 
 #### Request
 ```curl
-curl -X GET "https://behavioral.vin.li/api/v1/devices/602c6490-d7a3-11e3-9c1a-0800200c9a66/report_cards/overall"
+curl -u APP_ID:APP_SECRET -X GET "https://behavioral.vin.li/api/v1/devices/602c6490-d7a3-11e3-9c1a-0800200c9a66/report_cards/overall"
 ```
 ```objc
 //null the VLTimeSeries
@@ -166,7 +166,7 @@ GET https://behavioral.vin.li/api/v1/devices/fe4bbc20-cc90-11e3-8e05-f3abac5b6b5
 
 #### Request
 ```curl
-curl -X GET "https://behavioral.vin.li/api/v1/devices/fe4bbc20-cc90-11e3-8e05-f3abac5b6b58/report_cards/overall?since=2016-12-05&until=2016-12-13"
+curl -u APP_ID:APP_SECRET -X GET "https://behavioral.vin.li/api/v1/devices/fe4bbc20-cc90-11e3-8e05-f3abac5b6b58/report_cards/overall?since=2016-12-05&until=2016-12-13"
 ```
 ```objc
 //pass a VLTimeSeries for the date/time range you desire
@@ -206,7 +206,7 @@ GET https://behavioral.vin.li/api/v1/trips/b9e58eb4-0743-45e9-b9c6-86500f5412bb/
 
 #### Request
 ```curl
-curl -X GET "https://behavioral.vin.li/api/v1/trips/b9e58eb4-0743-45e9-b9c6-86500f5412bb/report_cards/_current"
+curl -u APP_ID:APP_SECRET -X GET "https://behavioral.vin.li/api/v1/trips/b9e58eb4-0743-45e9-b9c6-86500f5412bb/report_cards/_current"
 ```
 ```objc
 getReportCardForTripWithId:(nonnull NSString *) onSuccess:^(VLReportCard *reportCard, NSHTTPURLResponse *response) {
@@ -244,7 +244,7 @@ GET https://behavioral.vin.li/api/v1/report_cards/549d628c-48dc-412d-8087-44a9f8
 
 #### Request
 ```curl
-curl -X GET "https://behavioral.vin.li/api/v1/report_cards/549d628c-48dc-412d-8087-44a9f82f187e"
+curl -u APP_ID:APP_SECRET -X GET "https://behavioral.vin.li/api/v1/report_cards/549d628c-48dc-412d-8087-44a9f82f187e"
 ```
 ```objc
 getReportCardWithId:(nonnull NSString *) onSuccess:^(VLReportCard *reportCard, NSHTTPURLResponse *response) {
