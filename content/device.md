@@ -54,6 +54,10 @@ getDevicesWithLimit:(nullable NSNumber *) offset:(nullable NSNumber *) onSuccess
                                                                                   Showing 1 - 3 of 3
 ```
 ```json
+HTTP/1.1 200 OK
+Content-Type: application/json
+```
+```json
 {
   "devices": [
     {
