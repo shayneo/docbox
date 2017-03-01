@@ -44,10 +44,40 @@ For the example above, the Authorization header would be sent as:
 Important: the App Secret should be kept safe and rotated often. You can reset the App Secret from the <a href="https://dev.vin.li/#/apps" target="_blank"> App Management page</a> of the Developer Portal.
 
 ### User Action Authentication
+Vinli services require user actions to authernticate with OAuth 2.
 
+In general, there are two types of OAuth 2 clients, those that expect response tokens and those that expect response codes.
+
+Vinli supports two OAuth 2 flows:
+
+* Implicit Grant Flow is used for clients that cannot secure their App Secret. For example, web clients and mobile apps.
+* Authorization Code Flow is used for clients that can be secured against leaking their App Secret. For example, server clients or clients that require long-lived access.
+
+Implicit Grant Flow clients are directly granted a token by the authentication service in exchange for their ID, redirect URI, and the user’s approval.
+
+Authorization Code clients use a user-facing component to obtain a code from the authentication service in exchange for their ID, redirect URI, and the user’s approval. The user-facing component then hands the code to the secure client. The secure client can then obtain an access token from the authentication service in exchange for its ID, secret, and the authentication code.
+
+To initiate the authentication flow, the client directs the user to:
+
+`https://auth.vin.li/oauth/authorization/new?client_id={clientId}&redirect_uri={redirectUri}&response_type={responseType}`
+
+Response Type options include:
+* `code` - which will generate an Authorization code (following the Authorization Code Flow as described above)
+* `token` - which will generate an access token (following the Implicate Granat Flow as described above)
+
+After user authentication and app approval, the app should redirect to the provided redirect URI, which must match the redirect URI registered for the client. For the access token, the requested data will be in the fragment (after the #) portion of the URI. For the authentication code, the requested data will be in the query (after the ?). Error will be returned in the body.
 
 ### Developer Device Authentication
+If you are testing with a Vinli device or a Virtual Vinli device that you want access to with your application, you'll need to follow the same Authentication flow that users would. There is no connection between your My Vinli account and your Vinli Developer account.
 
+The easiest way to authenticate your device and generate a bearor token is to use the Implicate Grant Flow as described above. To do this:
+
+1. Creat an App in the developer portal
+2. Add a "Web" client to your app
+3. Populate this URL with the Id and redirectUri from your client `https://auth.vin.li/oauth/authorization/new?client_id={clientId}&redirect_uri={redirectUri}&response_type=token`
+4. Load the URL in your browser, and login with your My Vinli credentials
+5. The access token will be appended to your Rediect URI (after the `#`) once you've successfully logged in
+6. Optionally, you can hold on to the access token for future use
 
 ## Pagination
 Vinli APIs paginate all list responses. Pagination varies slightly depending on the type of data being returned:
