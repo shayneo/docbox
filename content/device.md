@@ -11,7 +11,7 @@ GET https://platform.vin.li/api/v1/devices
 ```
 #### Request
 ```curl
-curl -X GET "https://platform.vin.li/api/v1/devices"
+curl -u APP_ID:APP_SECRET -X GET "https://platform.vin.li/api/v1/devices"
 ```
 ```bash
 vinli device list
@@ -124,7 +124,7 @@ getDeviceWithId:(nonnull NSString *) onSuccess:^(VLDevice *device, NSHTTPURLResp
     }
 ```
 ```curl
-curl -X GET "https://platform.vin.li/api/v1/devices/821374c0-d6d8-11e3-9c1a-0800200c9a66"
+curl -u APP_ID:APP_SECRET -X GET "https://platform.vin.li/api/v1/devices/821374c0-d6d8-11e3-9c1a-0800200c9a66"
 ```
 #### Response
 ```json
