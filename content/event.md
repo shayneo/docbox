@@ -48,7 +48,7 @@ GET https://events.vin.li/api/v1/devices/68d489c0-d7a2-11e3-9c1a-0800200c9a66/ev
 ```
 #### Request
 ```curl
-curl -X GET "https://events.vin.li/api/v1/devices/68d489c0-d7a2-11e3-9c1a-0800200c9a66/events"
+curl -u APP_ID:APP_SECRET -X GET "https://events.vin.li/api/v1/devices/68d489c0-d7a2-11e3-9c1a-0800200c9a66/events"
 ```
 #### Response
 ```json
@@ -323,7 +323,7 @@ GET https://events.vin.li/api/v1/vehicles/48ef1264-7fd2-4319-8789-g9a6b85b7a8f/e
 ```
 #### Request
 ```curl
-curl -X GET "https://events.vin.li/api/v1/vehicles/48ef1264-7fd2-4319-8789-g9a6b85b7a8f/events"
+curl -u APP_ID:APP_SECRET -X GET "https://events.vin.li/api/v1/vehicles/48ef1264-7fd2-4319-8789-g9a6b85b7a8f/events"
 ```
 #### Response
 ```json
@@ -407,7 +407,7 @@ GET https://events.vin.li/api/v1/events/538f1195-a733-4ee7-a4e8-1fbbe7131f6a
 ```
 #### Request
 ```curl
-curl -X GET "https://events.vin.li/api/v1/events/538f1195-a733-4ee7-a4e8-1fbbe7131f6a"
+curl -u APP_ID:APP_SECRET -X GET "https://events.vin.li/api/v1/events/538f1195-a733-4ee7-a4e8-1fbbe7131f6a"
 ```
 #### Response
 ```json
@@ -495,7 +495,7 @@ POST https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/s
 ```
 #### Request
 ```curl
-curl -X POST "https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/subscriptions" -d '{
+curl -u APP_ID:APP_SECRET -X POST "https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/subscriptions" -d '{
     "subscription" : {
         "eventType" : "startup",
         "url": "https://myapp.com/notifications"
@@ -542,7 +542,7 @@ POST https://events.vin.li/api/v1/vehicles/48ef1264-7fd2-4319-8789-g9a6b85b7a8f/
 ```
 #### Request
 ```curl
-curl -X POST "https://events.vin.li/api/v1/vehicles/48ef1264-7fd2-4319-8789-g9a6b85b7a8f/subscriptions" -d '{
+curl -u APP_ID:APP_SECRET -X POST "https://events.vin.li/api/v1/vehicles/48ef1264-7fd2-4319-8789-g9a6b85b7a8f/subscriptions" -d '{
     "subscription" : {
         "eventType" : "startup",
         "url": "https://myapp.com/notifications"
@@ -631,7 +631,7 @@ POST https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/s
 ```
 #### Request
 ```curl
-curl -X POST "https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/subscriptions" -d '{
+curl -u APP_ID:APP_SECRET -X POST "https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/subscriptions" -d '{
     "subscription" : {
         "eventType" : "rule-*",
         "url": "https://myapp.com/notifications",
@@ -678,7 +678,7 @@ GET https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/su
 
 #### Request
 ```curl
-curl -X GET "https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/subscriptions"
+curl -u APP_ID:APP_SECRET -X GET "https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/subscriptions"
 ```
 
 #### Response
@@ -730,7 +730,7 @@ GET https://events.vin.li/api/v1/vehicles/48ef1264-7fd2-4319-8789-g9a6b85b7a8f/s
 
 #### Request
 ```curl
-curl -X GET "https://events.vin.li/api/v1/vehicles/48ef1264-7fd2-4319-8789-g9a6b85b7a8f/subscriptions"
+curl -u APP_ID:APP_SECRET -X GET "https://events.vin.li/api/v1/vehicles/48ef1264-7fd2-4319-8789-g9a6b85b7a8f/subscriptions"
 ```
 
 #### Response
@@ -796,7 +796,7 @@ GET https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa099b3
 
 #### Request
 ```curl
-curl -X GET "https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa099b313b"
+curl -u APP_ID:APP_SECRET -X GET "https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa099b313b"
 ```
 
 #### Response
@@ -848,7 +848,7 @@ POST https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/s
 ```
 #### Request
 ```curl
-curl -X POST "https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/subscriptions" -d '{
+curl -u APP_ID:APP_SECRET -X POST "https://events.vin.li/api/v1/devices/de01abb1-453d-4293-831a-f0d804b48fdf/subscriptions" -d '{
     "subscription" : {
         "eventType" : "rule-*",
         "url": "https://myapp.com/v2/notifications",
@@ -894,7 +894,7 @@ DELETE https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa09
 ```
 #### Request
 ```curl
-curl -X DELETE "https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa099b313b"ß
+curl -u APP_ID:APP_SECRET -X DELETE "https://events.vin.li/api/v1/subscriptions/917fb546-5666-4fdd-aed6-53fa099b313b"ß
 ```
 
 #### Repsonse
@@ -933,7 +933,7 @@ GET https://events.vin.li/api/v1/notifications/09704b59-83d9-44a5-a0f8-33d973bda
 
 #### Request
 ```curl
-curl -X GET "https://events.vin.li/api/v1/notifications/09704b59-83d9-44a5-a0f8-33d973bdac5e"
+curl -u APP_ID:APP_SECRET -X GET "https://events.vin.li/api/v1/notifications/09704b59-83d9-44a5-a0f8-33d973bdac5e"
 ```
 
 #### Response
@@ -973,7 +973,7 @@ GET https://events.vin.li/api/v1/subscriptions/a896ff7d-ca46-4bf4-af71-b9b1573c3
 
 #### Request
 ```curl
-curl -X GET "https://events.vin.li/api/v1/subscriptions/a896ff7d-ca46-4bf4-af71-b9b1573c3ef1/notifications"
+curl -u APP_ID:APP_SECRET -X GET "https://events.vin.li/api/v1/subscriptions/a896ff7d-ca46-4bf4-af71-b9b1573c3ef1/notifications"
 ```
 
 #### Response
@@ -1027,7 +1027,7 @@ GET https://events.vin.li/api/v1/events/314d7fcd-d4d6-4b78-9804-b171db60790a/not
 
 #### Request
 ```curl
-curl -X GET "https://events.vin.li/api/v1/events/314d7fcd-d4d6-4b78-9804-b171db60790a/notifications"
+curl -u APP_ID:APP_SECRET -X GET "https://events.vin.li/api/v1/events/314d7fcd-d4d6-4b78-9804-b171db60790a/notifications"
 ```
 
 #### Response
