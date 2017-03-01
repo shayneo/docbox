@@ -37,7 +37,7 @@ GET https://telemetry.vin.li/api/v1/devices/27a2ac50-d7bd-11e3-9c1a-0800200c9a66
 ```
 #### Request
 ```curl
-curl -X GET "https://telemetry.vin.li/api/v1/devices/27a2ac50-d7bd-11e3-9c1a-0800200c9a66/messages"
+curl -u APP_ID:APP_SECRET -X GET "https://telemetry.vin.li/api/v1/devices/27a2ac50-d7bd-11e3-9c1a-0800200c9a66/messages"
 ```
 
 #### Response
@@ -192,7 +192,7 @@ GET https://telemetry.vin.li/api/v1/messages/2f11d630-141e-11e4-b717-5977b6c38d2
 ```
 #### Request
 ```curl
-curl -X GET "https://telemetry.vin.li/api/v1/messages/2f11d630-141e-11e4-b717-5977b6c38d23"
+curl -u APP_ID:APP_SECRET -X GET "https://telemetry.vin.li/api/v1/messages/2f11d630-141e-11e4-b717-5977b6c38d23"
 ```
 #### Response
 ```json
@@ -251,7 +251,7 @@ GET https://telemetry.vin.li/api/v1/devices/27a2ac50-d7bd-11e3-9c1a-0800200c9a66
 
 #### Request
 ```curl
-curl -X GET "https://telemetry.vin.li/api/v1/devices/27a2ac50-d7bd-11e3-9c1a-0800200c9a66/locations?fields=rpm,vehicleSpeed"
+curl -u APP_ID:APP_SECRET -X GET "https://telemetry.vin.li/api/v1/devices/27a2ac50-d7bd-11e3-9c1a-0800200c9a66/locations?fields=rpm,vehicleSpeed"
 ```
 #### Response
 ```json
@@ -322,7 +322,7 @@ GET https://telemetry.vin.li/api/v1/devices/27a2ac50-d7bd-11e3-9c1a-0800200c9a66
 
 #### Request
 ```curl
-curl -X GET "https://telemetry.vin.li/api/v1/devices/27a2ac50-d7bd-11e3-9c1a-0800200c9a66/snapshots?fields=vehicleSpeed,rpm"
+curl -u APP_ID:APP_SECRET -X GET "https://telemetry.vin.li/api/v1/devices/27a2ac50-d7bd-11e3-9c1a-0800200c9a66/snapshots?fields=vehicleSpeed,rpm"
 ```
 
 #### Response
