@@ -12,7 +12,7 @@ GET https://diagnostic.vin.li/api/v1/vehicles/47fa348e-c3fa-4cad-8272-61940eae77
 ```
 #### Request
 ```curl
-curl -X GET "https://diagnostic.vin.li/api/v1/vehicles/47fa348e-c3fa-4cad-8272-61940eae7748/codes"
+curl -u APP_ID:APP_SECRET -X GET "https://diagnostic.vin.li/api/v1/vehicles/47fa348e-c3fa-4cad-8272-61940eae7748/codes"
 ```
 ```objc
 getDtcsForVehicleWithId:(NSString *) timeSeries:(VLTimeSeries *) onSuccess:^(VLDtcPager *dtcPager, NSHTTPURLResponse *response) {
@@ -102,7 +102,7 @@ GET https://diagnostic.vin.li/api/v1/codes/313cc7d7-1ad6-491k-9e02-a3f48e62984a
 ```
 #### Request
 ```curl
-curl -X GET "https://diagnostic.vin.li/api/v1/codes/313cc7d7-1ad6-491k-9e02-a3f48e62984a"
+curl -u APP_ID:APP_SECRET -X GET "https://diagnostic.vin.li/api/v1/codes/313cc7d7-1ad6-491k-9e02-a3f48e62984a"
 ```
 ```objc
 getCodeWithId:(NSString *) onSuccess:^(VLCode *code, NSHTTPURLResponse *response) {
@@ -142,7 +142,7 @@ GET https://diagnostic.vin.li/api/v1/vehicles/38ff2972-7fd2-4319-8389-b9a8b84a7c
 
 #### Request
 ```curl
-curl -X GET "https://diagnostic.vin.li/api/v1/vehicles/38ff2972-7fd2-4319-8389-b9a8b84a7c8f/battery_statuses/_current"
+curl -u APP_ID:APP_SECRET -X GET "https://diagnostic.vin.li/api/v1/vehicles/38ff2972-7fd2-4319-8389-b9a8b84a7c8f/battery_statuses/_current"
 ```
 ```objc
 getCurrentBatteryStatusWithVehicleId:(nonnull NSString *) onSuccess:^(VLBatteryStatus *batteryStatus, NSHTTPURLResponse *response) {
@@ -171,7 +171,7 @@ GET https://diagnostic.vin.li/api/v1/codes?number=P0001
 ```
 #### Request
 ```curl
-curl -X GET "https://diagnostic.vin.li/api/v1/codes?number=P0001"
+curl -u APP_ID:APP_SECRET -X GET "https://diagnostic.vin.li/api/v1/codes?number=P0001"
 ```
 ```objc
 getCodesWithPID:(NSString *) limit:(NSNumber *) offset:(NSNumber *) onSuccess:^(VLCodePager *codePager, NSHTTPURLResponse *response) {
