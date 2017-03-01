@@ -170,8 +170,6 @@ Content-Type: application/json
 ### Get a Device's Latest Vehicle
 Returns the vehicle most recently associated with the given device if it exists. If the device has not been associated with a vehicle, a null vehicle object is returned.
 
-Basic vehicle information is returned as part of this response. Follow the vehicle’s “self” link to get full detailed information about the vehicle.
-
 ```endpoint
 GET https://platform.vin.li/api/v1/devices/821374c0-d6d8-11e3-9c1a-0800200c9a66/vehicles/_latest
 ```
