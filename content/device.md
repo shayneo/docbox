@@ -154,12 +154,67 @@ curl -u APP_ID:APP_SECRET -X GET "https://platform.vin.li/api/v1/devices/821374c
 
 
 ### Register a Device
-This route is only accessible by Enterprise applications. Consumer applications gain and lose devices as users authorize access via the OAuth flow in MyVinli.
+This route is only accessible by Enterprise applications. Consumer applications gain and lose devices as users authorize access via the OAuth flow in My Vinli.
 
 Your application may register a device after it has been authorized by the owner of the device (See section above on “Authentication for User Actions”). This step is necessary before your application can access any data from the device or perform any actions on the device.
 
 A two-step process allow you to manage device authorization independent of user action. You can remove a device without requiring a user to revoke access to the device.
 
+```endpoint
+POST https://platform.vin.li/api/v1/devices
+```
+
+#### Request
+```curl
+curl -u APP_ID:APP_SECRET -X POST "https://platform.vin.li/api/v1/devices" -d '{
+    "device": {
+        "id": "821374c0-d6d8-11e3-9c1a-0800200c9a66"
+    }
+}
+```
+#### Body
+```json
+{
+    "device": {
+        "id": "821374c0-d6d8-11e3-9c1a-0800200c9a66"
+    }
+}
+```
+
+#### Response
+```json
+HTTP/1.1 201 CREATED
+```
+```json
+{
+    "device" : {
+        "id" : "821374c0-d6d8-11e3-9c1a-0800200c9a66",
+        "links" : {
+            "self" : "https://platform.vin.li/api/v1/devices/821374c0-d6d8-11e3-9c1a-0800200c9a66",
+            "vehicles" : "https://platform.vin.li/api/v1/devices/821374c0-d6d8-11e3-9c1a-0800200c9a66/vehicles",
+            "latestVehicle" : "https://platform.vin.li/api/v1/devices/821374c0-d6d8-11e3-9c1a-0800200c9a66/vehicles/_latest"
+        }
+    }
+}
+```
 
 ### Deregister a Device
+This route is only accessible by Enterprise applications. Consumer applications gain and lose devices as users authorize access via the OAuth flow in MyVinli.
 
+Deregistering a Device from your application prevents you from accessing that device’s data. Note this has several various effects on other section of the Vinli Platform. For instance, Event Services will remove any Rules associated with the device, Safety Services will remove any Emergency Contact actions from the Device (if your application registered the Device with Safety Services), and Diagnostic Services will remove any DTC alerts for this Device registered by your Application.
+
+It’s important to note that deregistering a Device is an Application-level action that will have no effect on any other Application (yours or someone else’s) that has been authorized for the Device.
+
+```endpoint
+DELETE https://platform.vin.li/api/v1/devices/821374c0-d6d8-11e3-9c1a-0800200c9a66
+```
+
+#### Request
+```curl
+curl -u APP_ID:APP_SECRET -X DELETE "https://platform.vin.li/api/v1/devices/821374c0-d6d8-11e3-9c1a-0800200c9a66"
+```
+
+#### Response
+```json
+HTTP/1.1 204 NO CONTENT
+```
