@@ -2715,7 +2715,7 @@ Alternate exists for:
   width:45px;
   display:inline-block;
   vertical-align:top;
-  -webkit-background-size:320px 70px;
+  -webkit-background-size:320px 70px; 
           background-size:320px 70px;
   }
   .credit-card.visa                       { background-position:0      0; }
@@ -3115,6 +3115,7 @@ Alternate exists for:
 .fill-pink        { background-color:#ed6498; }
 .fill-mustard     { background-color:#fbb03b; }
 .vinli-dev-green  { background-color:#00ab83; }
+.vinli-blue       { background-color:#00ab83; }
 
 .fill-darken0 { background:rgba(0,0,0,0.05); }
 .fill-darken1 { background:rgba(0,0,0,0.25); }
